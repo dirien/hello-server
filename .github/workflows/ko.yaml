@@ -11,7 +11,6 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    working-directory: .golang/
     steps:
       - uses: actions/setup-go@bfdd3570ce990073878bf10f6b2d79082de49492 # v2.2.0
         with:
@@ -20,4 +19,5 @@ jobs:
 
       - uses: imjasonh/setup-ko@ace48d793556083a76f1e3e6068850c1f4a369aa # v0.6
       - run: ko build . --platform=linux/amd64,linux/arm64 -B
+        working-directory: .golang/
 
