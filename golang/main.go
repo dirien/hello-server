@@ -20,9 +20,25 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func RandomFileGenerator(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	fileName := vars["fileName"]
+	file, err := os.CreateTemp(os.TempDir(), fileName)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+	bigBuff := make([]byte, 750000000)
+	_, err = file.Write(bigBuff)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", YourHandler)
+	r.HandleFunc("/file/{fileName}", RandomFileGenerator)
 
 	port := os.Getenv("PORT")
 	if port == "" {
