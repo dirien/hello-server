@@ -49,11 +49,21 @@ func PrintEnvByName(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ReadFileAndPrintContent(w http.ResponseWriter, r *http.Request) {
+	fileName := os.Getenv("FILE")
+	readFile, err := os.ReadFile(fileName)
+	if err != nil {
+		return
+	}
+	_, err = w.Write(readFile)
+}
+
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", YourHandler)
 	r.HandleFunc("/file/{fileName}", RandomFileGenerator)
 	r.HandleFunc("/env/{envVar}", PrintEnvByName)
+	r.HandleFunc("/read", ReadFileAndPrintContent)
 
 	port := os.Getenv("PORT")
 	if port == "" {
