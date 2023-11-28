@@ -14,4 +14,4 @@ FROM cgr.dev/chainguard/static:latest
 COPY --from=build /golang-server /golang-server
 EXPOSE 8080
 CMD ["/golang-server"]
-HEALTHCHECK --interval=5s --timeout=3s CMD curl -f http://localhost:8080/health || exit 1
+HEALTHCHECK --interval=5s --timeout=3s CMD curl -f http://localhost:8080 || exit 1
