@@ -1,0 +1,22 @@
+{
+  "context7": {
+    "args": [
+      "-y",
+      "@anthropic-ai/context7-mcp"
+    ],
+    "command": "npx",
+    "type": "stdio"
+  },
+  "pulumi": {
+    "args": [
+      "mcp-remote",
+      "https://mcp.ai.pulumi.com/mcp",
+      "--header",
+      "Authorization: Bearer ${PULUMI_ACCESS_TOKEN}",
+      "--header",
+      "X-Pulumi-Org: ediri"
+    ],
+    "command": "npx",
+    "type": "stdio"
+  }
+}
